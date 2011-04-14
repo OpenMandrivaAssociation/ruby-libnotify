@@ -1,6 +1,6 @@
 %define name ruby-libnotify
-%define version 0.3.3
-%define release %mkrel 2
+%define version 0.5.0
+%define release %mkrel 1
 
 Summary: Libnotify bindings for Ruby
 Name: %{name}
@@ -9,9 +9,10 @@ Release: %{release}
 Group: Development/Ruby
 License: BSD-like
 URL: http://ruby-libnotify.rubyforge.org/
-Source0: %{name}-%{version}.tar.bz2
+Source0: vargolo-ruby-libnotify-v%{version}-0-g95340d9.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
-BuildRequires: ruby-devel 
+BuildRequires: ruby-devel
+BuildRequires: ruby-RubyGems
 BuildRequires: ruby-gnome2-devel 
 BuildRequires: ruby-gtk2
 BuildRequires: libnotify-devel
@@ -20,21 +21,22 @@ BuildRequires: libnotify-devel
 Libnotify bindings for Ruby
 
 %prep
-%setup -q
+%setup -qn vargolo-ruby-libnotify-3fc8bb8
 
 %build
-ruby extconf.rb --vendor
-make
+ruby setup.rb config --site-ruby=%ruby_vendorlibdir --so-dir=%ruby_vendorarchdir
+ruby setup.rb setup
 
 %install
-%makeinstall_std
+rm -fr %buildroot
+ruby setup.rb install --prefix=%buildroot
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-, root, root)
-%doc AUTHORS COPYING ChangeLog README doc examples
+%doc AUTHORS.rdoc CHANGELOG.rdoc COPYING README.rdoc examples
 %{ruby_vendorarchdir}/*.so
 %{ruby_vendorlibdir}/*.rb
 
