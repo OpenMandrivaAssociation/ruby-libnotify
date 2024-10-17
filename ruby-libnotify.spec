@@ -8,7 +8,7 @@ Version: %{version}
 Release: %{release}
 Group: Development/Ruby
 License: BSD-like
-URL: http://ruby-libnotify.rubyforge.org/
+URL: https://ruby-libnotify.rubyforge.org/
 Source0: vargolo-ruby-libnotify-v%{version}-0-g95340d9.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: ruby-devel
